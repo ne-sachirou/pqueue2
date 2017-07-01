@@ -28,6 +28,7 @@ defmodule Pqueue2.Mixfile do
       {:credo, "~> 0.8", only: :dev, runtime: false},
       {:dialyxir, "~> 0.5", only: :dev, runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
+      {:pqueue, "~> 1.7"},
     ]
   end
 end
