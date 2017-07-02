@@ -1,5 +1,8 @@
 defmodule PQueue2Test do
+  import PQueue2Test.PList2
+
   use ExUnit.Case, async: true
+  use PropCheck
 
   doctest PQueue2
 
@@ -39,18 +42,50 @@ defmodule PQueue2Test do
   end
 
   describe "pop_with_priority/2" do
-    test "Pop", do: assert {{:value, 1}, %PQueue2{}} = PQueue2.new |> PQueue2.put(:value, 1) |> PQueue2.pop_with_priority
+    test "Pop",
+      do: assert {{:value, 1}, %PQueue2{}} = PQueue2.new |> PQueue2.put(:value, 1) |> PQueue2.pop_with_priority
 
-    test "Pop from an empty queue", do: assert {{:empty, 0}, %PQueue2{}} = PQueue2.pop_with_priority PQueue2.new, :empty
+    test "Pop from an empty queue",
+      do: assert {:empty, %PQueue2{}} = PQueue2.pop_with_priority PQueue2.new, :empty
 
-    test "Pop from an empty queue with a dafault value", do: assert {{nil, 0}, %PQueue2{}} = PQueue2.pop_with_priority PQueue2.new
+    test "Pop from an empty queue with a dafault value",
+      do: assert {nil, %PQueue2{}} = PQueue2.pop_with_priority PQueue2.new
   end
 
   describe "pop_at/3" do
-    test "Pop at the priority", do: {:value, %PQueue2{}} = PQueue2.new |> PQueue2.put(:value, 1) |> PQueue2.pop_at(1)
+    test "Pop at the priority",
+      do: {:value, %PQueue2{}} = PQueue2.new |> PQueue2.put(:value, 1) |> PQueue2.pop_at(1)
 
-    test "Pop at the priority from an empty priority", do: {:empty, %PQueue2{}} = PQueue2.new |> PQueue2.put(:value, 1) |> PQueue2.pop_at(0, :empty)
+    test "Pop at the priority from an empty priority",
+      do: {:empty, %PQueue2{}} = PQueue2.new |> PQueue2.put(:value, 1) |> PQueue2.pop_at(0, :empty)
 
-    test "Pop at the priority from an empty priority with a default value", do: {nil, %PQueue2{}} = PQueue2.new |> PQueue2.put(:value, 1) |> PQueue2.pop_at(0)
+    test "Pop at the priority from an empty priority with a default value",
+      do: {nil, %PQueue2{}} = PQueue2.new |> PQueue2.put(:value, 1) |> PQueue2.pop_at(0)
+  end
+
+  property "Pop the same value" do
+    forall {value, priority} <- {binary(), non_neg_integer()} do
+      assert {value, PQueue2.new} == PQueue2.new |> PQueue2.put(value, priority) |> PQueue2.pop
+    end
+  end
+
+  property "Pop the max value" do
+    forall items <- list {binary(), non_neg_integer()} do
+      assert max_value(items, :empty) == items |> Enum.into(PQueue2.new) |> PQueue2.pop(:empty) |> elem(0)
+    end
+  end
+
+  property "Pop the max value & priority" do
+    forall items <- list {binary(), non_neg_integer()} do
+      assert max_item(items, :empty) ==
+        items |> Enum.into(PQueue2.new) |> PQueue2.pop_with_priority(:empty) |> elem(0)
+    end
+  end
+
+  property "Pop the max value at the priority" do
+    forall {items, priority} <- {list({binary(), non_neg_integer()}), non_neg_integer()} do
+      assert max_value_at(items, priority, :empty) ==
+        items |> Enum.into(PQueue2.new) |> PQueue2.pop_at(priority, :empty) |> elem(0)
+    end
   end
 end

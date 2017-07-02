@@ -3,4 +3,6 @@
   "dialyxir": {:hex, :dialyxir, "0.5.0", "5bc543f9c28ecd51b99cc1a685a3c2a1a93216990347f259406a910cf048d1d7", [:mix], [], "hexpm"},
   "earmark": {:hex, :earmark, "1.2.2", "f718159d6b65068e8daeef709ccddae5f7fdc770707d82e7d126f584cd925b74", [:mix], [], "hexpm"},
   "ex_doc": {:hex, :ex_doc, "0.16.2", "3b3e210ebcd85a7c76b4e73f85c5640c011d2a0b2f06dcdf5acdb2ae904e5084", [:mix], [{:earmark, "~> 1.1", [hex: :earmark, repo: "hexpm", optional: false]}], "hexpm"},
-  "pqueue": {:hex, :pqueue, "1.7.1", "ea58b54c81f79705c6b7bb3c188098a8e44e9f44fe5b72d250b5b8eb93aa6da5", [:rebar3], [], "hexpm"}}
+  "pqueue": {:hex, :pqueue, "1.7.1", "ea58b54c81f79705c6b7bb3c188098a8e44e9f44fe5b72d250b5b8eb93aa6da5", [:rebar3], [], "hexpm"},
+  "propcheck": {:hex, :propcheck, "0.0.1", "e4f88852ee28a4d9b473cbc527504613289d377eb8fad67700008b5e51fb7711", [:mix], [{:proper, "~> 1.1.1-beta", [hex: :proper, repo: "hexpm", optional: false]}], "hexpm"},
+  "proper": {:hex, :proper, "1.1.1-beta", "5eef3fa0cae017ecb4bf6fd6a144349a048e999223a4f1e98ce372ff1772edd3", [:rebar3], [], "hexpm"}}
