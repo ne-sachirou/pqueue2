@@ -37,6 +37,7 @@ defmodule PQueue2.Mixfile do
       {:dialyxir, "~> 0.5", only: :dev, runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       # {:excheck, "~> 0.5", only: :test},
+      {:inch_ex, "~> 0.5", only: :dev, runtime: false},
       {:pqueue, "~> 1.7"},
       {:propcheck, "~> 0.0", only: :test},
       # {:triq, github: "triqng/triq", only: :test},
@@ -45,7 +46,7 @@ defmodule PQueue2.Mixfile do
 
   defp aliases do
     [
-      "lint": ["credo --strict", "dialyzer --halt-exit-status"],
+      "lint": ["credo --strict", "inch", "dialyzer --halt-exit-status"],
     ]
   end
 
