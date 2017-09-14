@@ -33,20 +33,16 @@ defmodule PQueue2.Mixfile do
 
   defp deps do
     [
-      {:credo, "~> 0.8", only: :dev, runtime: false},
-      {:dialyxir, "~> 0.5", only: :dev, runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       # {:excheck, "~> 0.5", only: :test},
-      {:inch_ex, "~> 0.5", only: :dev, runtime: false},
+      {:inner_cotton, github: "ne-sachirou/inner_cotton", only: [:dev, :test], runtime: false},
       {:pqueue, "~> 1.7"},
-      {:propcheck, "~> 0.0", only: :test},
       # {:triq, github: "triqng/triq", only: :test},
     ]
   end
 
   defp aliases do
     [
-      "lint": ["credo --strict", "inch", "dialyzer --halt-exit-status"],
     ]
   end
 
