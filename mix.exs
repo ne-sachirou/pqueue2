@@ -33,9 +33,9 @@ defmodule PQueue2.Mixfile do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.16", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.17", only: :dev, runtime: false},
       # {:excheck, "~> 0.5", only: :test},
-      {:inner_cotton, github: "ne-sachirou/inner_cotton", only: [:dev, :test], runtime: false},
+      {:inner_cotton, github: "ne-sachirou/inner_cotton", only: [:dev, :test]},
       {:pqueue, "~> 1.7"},
       # {:triq, github: "triqng/triq", only: :test},
     ]

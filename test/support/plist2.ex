@@ -12,5 +12,6 @@ defmodule PQueue2Test.PList2 do
     end
   end
 
-  def max_value_at(items, priority, default \\ nil), do: items |> Enum.filter(&(elem(&1, 1) == priority)) |> max_value(default)
+  def max_value_at(items, priority, default \\ nil),
+    do: items |> Enum.filter(&(elem(&1, 1) == priority)) |> max_value(default)
 end
