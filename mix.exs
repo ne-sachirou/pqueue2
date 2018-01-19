@@ -4,28 +4,42 @@ defmodule PQueue2.Mixfile do
   def project do
     [
       app: :pqueue2,
-      version: "0.1.0",
-      elixir: "~> 1.5",
-      elixirc_paths: elixirc_paths(Mix.env()),
       build_embedded: Mix.env() == :prod,
-      start_permanent: Mix.env() == :prod,
-      aliases: aliases(),
       deps: deps(),
       description: description(),
+      elixir: "~> 1.5",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      aliases: aliases(),
       package: package(),
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
+      start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
+      version: "0.2.0",
+
       # Docs
-      name: "PQueue2",
-      source_url: "https://github.com/ne-sachirou/pqueue2",
-      homepage_url: "https://github.com/ne-sachirou/pqueue2",
       docs: [
         main: "PQueue2",
         extras: ["README.md"]
-      ]
+      ],
+      homepage_url: "https://github.com/ne-sachirou/pqueue2",
+      name: "PQueue2",
+      source_url: "https://github.com/ne-sachirou/pqueue2"
     ]
   end
 
-  def application do
-    [extra_applications: []]
+  def application, do: [extra_applications: []]
+
+  defp aliases, do: []
+
+  defp description do
+    """
+    Priority queue that wraps pqueue2.
+    """
   end
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
@@ -39,25 +53,15 @@ defmodule PQueue2.Mixfile do
     ]
   end
 
-  defp aliases do
-    []
-  end
-
-  defp description do
-    """
-    Priority queue that wraps pqueue2.
-    """
-  end
-
   defp package do
     [
+      files: ["LICENSE", "README.md", "mix.exs", "lib"],
       licenses: ["MIT"],
-      name: :pqueue2,
-      maintainers: ["ne_Sachirou <utakata.c4se@gmail.com>"],
       links: %{
         GitHub: "https://github.com/ne-sachirou/pqueue2"
       },
-      files: ["LICENSE", "README.md", "mix.exs", "lib"]
+      maintainers: ["ne_Sachirou <utakata.c4se@gmail.com>"],
+      name: :pqueue2
     ]
   end
 end

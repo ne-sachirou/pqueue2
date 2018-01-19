@@ -15,5 +15,5 @@ defimpl Enumerable, for: PQueue2 do
     end
   end
 
-  def slice(queue), do: {:error, __MODULE__}
+  def slice(_queue), do: {:error, __MODULE__}
 end

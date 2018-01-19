@@ -24,6 +24,6 @@ Add `pqueue2` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:pqueue2, "~> 0.1"}]
+  [{:pqueue2, "~> 0.2"}]
 end
 ```
