@@ -17,9 +17,10 @@ defmodule PQueue2 do
   """
 
   # @type t :: %__MODULE__{pq: :pqueue2.pqueue2}
-  @type pqueue2 :: :empty |
-    {integer, pqueue2, pqueue2, :element, term} |
-    {integer, pqueue2, pqueue2, :queue, :queue.queue}
+  @type pqueue2 ::
+          :empty
+          | {integer, pqueue2, pqueue2, :element, term}
+          | {integer, pqueue2, pqueue2, :queue, :queue.queue()}
   @type t :: %__MODULE__{pq: pqueue2}
 
   @default_priority 0
@@ -31,25 +32,26 @@ defmodule PQueue2 do
   Create a new priority queue.
   """
   @spec new :: t
-  def new, do: %__MODULE__{pq: :pqueue2.new}
+  def new, do: %__MODULE__{pq: :pqueue2.new()}
 
   @doc """
   """
   @spec empty?(t) :: boolean
   def empty?(queue)
-  def empty?(%{pq: pq}), do: :pqueue2.is_empty pq
+  def empty?(%{pq: pq}), do: :pqueue2.is_empty(pq)
 
   @doc """
   """
   @spec count(t) :: non_neg_integer
   def count(queue)
-  def count(%{pq: pq}), do: :pqueue2.len pq
+  def count(%{pq: pq}), do: :pqueue2.len(pq)
 
   @doc """
   Put the value.
   """
   @spec put(t, term, non_neg_integer) :: t
-  def put(queue, value, priority \\ @default_priority), do: update_in queue.pq, &:pqueue2.in(value, priority, &1)
+  def put(queue, value, priority \\ @default_priority),
+    do: update_in(queue.pq, &:pqueue2.in(value, priority, &1))
 
   @doc """
   Pop the max value.
@@ -65,7 +67,7 @@ defmodule PQueue2 do
   """
   @spec pop(t, term) :: {term, t}
   def pop(queue, default \\ @default_value) do
-    case :pqueue2.out queue.pq do
+    case :pqueue2.out(queue.pq) do
       {:empty, _pq} -> {default, queue}
       {{:value, value}, pq} -> {value, put_in(queue.pq, pq)}
     end
@@ -79,8 +81,10 @@ defmodule PQueue2 do
   """
   @spec pop_with_priority(t, term) :: {{term, non_neg_integer} | term, t}
   def pop_with_priority(queue, default \\ @default_value) do
-    case :pqueue2.pout queue.pq do
-      {:empty, _pq} -> {default, queue}
+    case :pqueue2.pout(queue.pq) do
+      {:empty, _pq} ->
+        {default, queue}
+
       {{:value, value, priority}, pq} ->
         {{value, priority}, put_in(queue.pq, pq)}
     end
@@ -97,7 +101,7 @@ defmodule PQueue2 do
   """
   @spec pop_at(t, non_neg_integer, term) :: {term, t}
   def pop_at(queue, priority, default \\ @default_value) do
-    case :pqueue2.out priority, queue.pq do
+    case :pqueue2.out(priority, queue.pq) do
       {:empty, _pq} -> {default, queue}
       {{:value, value}, pq} -> {value, put_in(queue.pq, pq)}
     end

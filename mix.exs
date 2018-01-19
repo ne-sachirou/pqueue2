@@ -5,10 +5,10 @@ defmodule PQueue2.Mixfile do
     [
       app: :pqueue2,
       version: "0.1.0",
-      elixir: "~> 1.4",
-      elixirc_paths: elixirc_paths(Mix.env),
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      elixir: "~> 1.5",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
       description: description(),
@@ -19,8 +19,8 @@ defmodule PQueue2.Mixfile do
       homepage_url: "https://github.com/ne-sachirou/pqueue2",
       docs: [
         main: "PQueue2",
-        extras: ["README.md"],
-      ],
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -29,19 +29,18 @@ defmodule PQueue2.Mixfile do
   end
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   defp deps do
     [
       {:ex_doc, "~> 0.18", only: :dev, runtime: false},
       {:inner_cotton, github: "ne-sachirou/inner_cotton", only: [:dev, :test]},
-      {:pqueue, "~> 1.7"},
+      {:pqueue, "~> 1.7"}
     ]
   end
 
   defp aliases do
-    [
-    ]
+    []
   end
 
   defp description do
@@ -56,7 +55,7 @@ defmodule PQueue2.Mixfile do
       name: :pqueue2,
       maintainers: ["ne_Sachirou <utakata.c4se@gmail.com>"],
       links: %{
-        "GitHub": "https://github.com/ne-sachirou/pqueue2",
+        GitHub: "https://github.com/ne-sachirou/pqueue2"
       },
       files: ["LICENSE", "README.md", "mix.exs", "lib"]
     ]
