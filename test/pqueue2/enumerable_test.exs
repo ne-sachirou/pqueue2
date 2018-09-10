@@ -20,7 +20,7 @@ defmodule EnumerableTest do
   end
 
   property "into |> to_list sort collectly" do
-    check all items <- list_of({binary(), integer(0..10000)}) do
+    check all items <- list_of({binary(), integer(0..10_000)}) do
       assert items |> sort |> Enum.map(&elem(&1, 0)) ==
                items |> Enum.into(PQueue2.new()) |> Enum.to_list()
     end

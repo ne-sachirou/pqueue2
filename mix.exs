@@ -7,7 +7,11 @@ defmodule PQueue2.Mixfile do
       build_embedded: Mix.env() == :prod,
       deps: deps(),
       description: description(),
-      elixir: "~> 1.5",
+      dialyzer: [
+        flags: [:no_undefined_callbacks],
+        remove_defaults: [:unknown]
+      ],
+      elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env()),
       aliases: aliases(),
       package: package(),
@@ -19,7 +23,7 @@ defmodule PQueue2.Mixfile do
       ],
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      version: "0.2.0",
+      version: "0.3.0",
 
       # Docs
       docs: [

@@ -1,7 +1,12 @@
 defmodule PQueue2Test.PList2 do
+  @moduledoc false
+
   def sort(items),
     do:
-      items |> Enum.group_by(&elem(&1, 1)) |> Enum.sort() |> Enum.map(&elem(&1, 1))
+      items
+      |> Enum.group_by(&elem(&1, 1))
+      |> Enum.sort()
+      |> Enum.map(&elem(&1, 1))
       |> Enum.concat()
 
   def max_item(items, default \\ nil)
