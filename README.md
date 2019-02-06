@@ -4,6 +4,7 @@ Priority queue that wraps [pqueue2](https://hex.pm/packages/pqueue).
 
 [![Hex.pm](https://img.shields.io/hexpm/v/pqueue2.svg)](https://hex.pm/packages/pqueue2)
 [![Build Status](https://travis-ci.org/ne-sachirou/pqueue2.svg?branch=master)](https://travis-ci.org/ne-sachirou/pqueue2)
+[![Coverage Status](https://coveralls.io/repos/github/ne-sachirou/pqueue2/badge.svg)](https://coveralls.io/github/ne-sachirou/pqueue2)
 
 ```elixir
 q = PQueue2.new |> PQueue2.put(:a, 2) |> PQueue2.put(:b, 1) |> PQueue2.put(:c, 1)
