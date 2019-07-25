@@ -76,29 +76,28 @@ defmodule PQueue2Test do
   end
 
   property "Pop the same value" do
-    check all {value, priority} <- {binary(), integer()}, priority >= 0 do
+    check all({value, priority} <- {binary(), positive_integer()}) do
       assert {value, PQueue2.new()} ==
                PQueue2.new() |> PQueue2.put(value, priority) |> PQueue2.pop()
     end
   end
 
   property "Pop the max value" do
-    check all items <- list_of({binary(), integer(0..10_000)}) do
+    check all(items <- list_of({binary(), integer(0..10_000)})) do
       assert max_value(items, :empty) ==
                items |> Enum.into(PQueue2.new()) |> PQueue2.pop(:empty) |> elem(0)
     end
   end
 
   property "Pop the max value & priority" do
-    check all items <- list_of({binary(), integer(0..10_000)}) do
+    check all(items <- list_of({binary(), integer(0..10_000)})) do
       assert max_item(items, :empty) ==
                items |> Enum.into(PQueue2.new()) |> PQueue2.pop_with_priority(:empty) |> elem(0)
     end
   end
 
   property "Pop the max value at the priority" do
-    check all {items, priority} <- {list_of({binary(), integer(0..10_000)}), integer()},
-              priority >= 0 do
+    check all({items, priority} <- {list_of({binary(), integer(0..10_000)}), positive_integer()}) do
       assert max_value_at(items, priority, :empty) ==
                items |> Enum.into(PQueue2.new()) |> PQueue2.pop_at(priority, :empty) |> elem(0)
     end
